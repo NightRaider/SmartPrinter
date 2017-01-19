@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-public class PrintHistory
+public class PrintHistory : MonoBehaviour
 {
+    public TextAsset file;
+
+    void Start()
+    {
+        Load(file);
+
+        Debug.Log(Make_Graph_Date());
+    }
+
     public class Row
     {
         public string Date;
@@ -11,8 +21,16 @@ public class PrintHistory
         public string User;
         public string Pages;
         public string Title;
-
     }
+
+    // Create class to store value for making graphs
+    public class GraphData
+    {
+        public string Name;
+        public int value;
+    }
+
+    List<GraphData> dateGraphList = new List<GraphData>();
 
     List<Row> rowList = new List<Row>();
     bool isLoaded = false;
@@ -98,4 +116,15 @@ public class PrintHistory
         return rowList.FindAll(x => x.Title == find);
     }
 
+    // Create LINQ Query based sorting method
+    public List<GraphData> Make_Graph_Date()
+    {
+        var query = rowList.GroupBy(x => x.Date, (y, z) => new { Name = y, Count = z.Count() });
+        
+        foreach (var item in query)
+        {
+            dateGraphList.Add(new GraphData() {Name=item.Name,value=item.Count });
+        }
+        return dateGraphList;
+    }
 }
