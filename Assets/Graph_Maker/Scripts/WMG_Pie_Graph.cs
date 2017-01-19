@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class WMG_Pie_Graph : WMG_GUI_Functions {
-	
+    // public field to script PrintHistory.cs
+    public PrintHistory printHistory;
+
 	public bool updateGraph;
 	public bool updateGraphEveryFrame;
 	public float animationDuration;
@@ -49,7 +52,10 @@ public class WMG_Pie_Graph : WMG_GUI_Functions {
 		if (graphManager != null) {
 			setManager(graphManager);
 		}
-	}
+        var lst=printHistory.dateGraphList.Select(x => (float)x.value).ToList();
+        sliceValues = printHistory.dateGraphList.Select(x => (float)x.value).ToList();
+        sliceLabels = printHistory.dateGraphList.Select(x => x.Name).ToList();
+    }
 	
 	void Update () {
 		if (updateGraph && !updateGraphEveryFrame && !isAnimating && !isSortAnimating) {

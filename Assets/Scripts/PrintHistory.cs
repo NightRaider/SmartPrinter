@@ -30,7 +30,7 @@ public class PrintHistory : MonoBehaviour
         public int value;
     }
 
-    List<GraphData> dateGraphList = new List<GraphData>();
+    public List<GraphData> dateGraphList = new List<GraphData>();
 
     List<Row> rowList = new List<Row>();
     bool isLoaded = false;
