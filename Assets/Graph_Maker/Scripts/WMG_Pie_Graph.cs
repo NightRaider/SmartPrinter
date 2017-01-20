@@ -6,8 +6,9 @@ using System.Linq;
 public class WMG_Pie_Graph : WMG_GUI_Functions {
     // public field to script PrintHistory.cs
     public PrintHistory printHistory;
+    public TextAsset file;
 
-	public bool updateGraph;
+    public bool updateGraph;
 	public bool updateGraphEveryFrame;
 	public float animationDuration;
 	public float sortAnimationDuration;
@@ -52,7 +53,9 @@ public class WMG_Pie_Graph : WMG_GUI_Functions {
 		if (graphManager != null) {
 			setManager(graphManager);
 		}
-        var lst=printHistory.dateGraphList.Select(x => (float)x.value).ToList();
+        printHistory.loadFile(file);
+        printHistory.Make_Graph_Date();
+
         sliceValues = printHistory.dateGraphList.Select(x => (float)x.value).ToList();
         sliceLabels = printHistory.dateGraphList.Select(x => x.Name).ToList();
     }

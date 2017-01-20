@@ -5,13 +5,11 @@ using System.Linq;
 
 public class PrintHistory : MonoBehaviour
 {
-    public TextAsset file;
+    //public TextAsset file;
 
-    void Start()
+    public void loadFile(TextAsset file)
     {
         Load(file);
-
-        Debug.Log(Make_Graph_Date());
     }
 
     public class Row
