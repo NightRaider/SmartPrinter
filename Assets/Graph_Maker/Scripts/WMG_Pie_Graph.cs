@@ -54,7 +54,7 @@ public class WMG_Pie_Graph : WMG_GUI_Functions {
 			setManager(graphManager);
 		}
         printHistory.loadFile(file);
-        printHistory.Make_Graph_Date();
+        printHistory.Make_Graph_User();
 
         sliceValues = printHistory.dateGraphList.Select(x => (float)x.value).ToList();
         sliceLabels = printHistory.dateGraphList.Select(x => x.Name).ToList();

@@ -125,4 +125,15 @@ public class PrintHistory : MonoBehaviour
         }
         return dateGraphList;
     }
+
+    public List<GraphData> Make_Graph_User()
+    {
+        var query = rowList.GroupBy(x => x.User, (y, z) => new { Name = y, Count = z.Count() });
+
+        foreach (var item in query)
+        {
+            dateGraphList.Add(new GraphData() { Name = item.Name, value = item.Count });
+        }
+        return dateGraphList;
+    }
 }

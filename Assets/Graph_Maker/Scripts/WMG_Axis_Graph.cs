@@ -2,10 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Holoville.HOTween;
+using System.Linq;
 
 public class WMG_Axis_Graph : WMG_Graph_Manager {
-	
-	public enum graphTypes {line, bar_side, bar_stacked, bar_stacked_percent};
+    public PrintHistory printHistory;
+    public TextAsset file;
+
+    public enum graphTypes {line, bar_side, bar_stacked, bar_stacked_percent};
 	public graphTypes graphType;
 	public enum orientationTypes {vertical, horizontal};
 	public orientationTypes orientationType;
@@ -231,10 +234,17 @@ public class WMG_Axis_Graph : WMG_Graph_Manager {
 	private bool numXAxisLabelsChanged;
 	
 	void Start() {
-		checkCache(); // Set all cache variables to the current values
+        printHistory.loadFile(file);
+        printHistory.Make_Graph_Date();
+        xAxisLabels = printHistory.dateGraphList.Select(x => x.Name).ToList();
+        xAxisLabels.Reverse();
+        
+        checkCache(); // Set all cache variables to the current values
 		setCacheFlags(true); // Set all cache change flags to true to update everything on start
 		orientationTypeChanged = false; // Except orientation, since this swaps the orientation
-	}
+
+
+    }
 	
 	void LateUpdate () {
 		checkCache(); // Check current vs cached values for all graph and series variables
