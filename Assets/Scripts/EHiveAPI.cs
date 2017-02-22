@@ -12,7 +12,7 @@ public class EHiveAPI : MonoBehaviour
 
     private WWW wwwobj;
     [SerializeField]
-    private float powerVal;
+    public float powerVal;
 
     // Use this for initialization
     void Start()
