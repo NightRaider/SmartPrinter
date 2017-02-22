@@ -5,6 +5,7 @@ using System.IO;
 
 public class TakeScreenshot : MonoBehaviour
 {
+    public KeyCode triggerKey;
     public string prefix = "Screenshot";
     public enum method { captureScreenshotPng, ReadPixelsPng, ReadPixelsJpg };
     public method captMethod = method.captureScreenshotPng;
@@ -17,6 +18,7 @@ public class TakeScreenshot : MonoBehaviour
     private Rect sRect;
     string date;
 
+
     void Start()
     {
         sw = Screen.width;
@@ -26,7 +28,7 @@ public class TakeScreenshot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(triggerKey))
         {
             TakeShot();
         }
