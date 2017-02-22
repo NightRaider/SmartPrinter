@@ -2,9 +2,13 @@
 using System.Collections;
 
 public class ErrorIndicator : MonoBehaviour {
+    public mono_gmail email;
+    public string mailBody;
+
     public KeyCode triggerKey;
     public float timePeriod = 0.5f;
     private bool errorFlag = false;
+
 	// Use this for initialization
 	void Start () {
         GetComponent<Renderer>().enabled = false;
@@ -23,6 +27,7 @@ public class ErrorIndicator : MonoBehaviour {
         if (errorFlag)
         {
             StartCoroutine("flash");
+            email.sendAlert(this.name,mailBody);
         }
         else
         {
